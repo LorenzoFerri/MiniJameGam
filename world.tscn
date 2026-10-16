@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://jx2jwdt1nut4"]
+
+[ext_resource type="PackedScene" uid="uid://gassisgg7cl" path="res://rocket.tscn" id="1_f3sb7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_12j75"]
+
+[sub_resource type="Environment" id="Environment_12j75"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="World" type="Node3D" unique_id=1966058354]
+
+[node name="Rocket" parent="." unique_id=1538368647 instance=ExtResource("1_f3sb7")]
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=927809855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1289203873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=278852285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.611488, 0, -12.577219)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=78776128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.406868, 0, -7.037403)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=418124139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.601929, 0, -32.984085)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=307876464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.467373, 0, 17.213425)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=87020064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.032661, 0, 20.548616)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=1916410887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.796986, 0, 3.2508297)
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1906247675]
+environment = SubResource("Environment_12j75")
