@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="MiniJameGam"
-run/main_scene="uid://jx2jwdt1nut4"
+run/main_scene="uid://b546rbg17xvyd"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SignalBus="*uid://3lrgrje7sj8g"
+GameManager="*uid://b1lw4kpi1m3ef"
 
 [display]
 

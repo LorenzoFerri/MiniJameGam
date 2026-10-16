@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://8njq1xlc26y2"]
+
+[ext_resource type="Script" uid="uid://ddmb3occflq84" path="res://Asteroid/Asteroid.gd" id="1_h8dtb"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_12j75"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_12j75"]
+
+[node name="Asteroid" type="CharacterBody3D" unique_id=493480922]
+collision_mask = 0
+script = ExtResource("1_h8dtb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=656008093]
+mesh = SubResource("SphereMesh_12j75")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=383189110]
+shape = SubResource("SphereShape3D_12j75")

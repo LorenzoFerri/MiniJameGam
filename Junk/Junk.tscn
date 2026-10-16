@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b7jfdteiv5ivs"]
+
+[ext_resource type="Script" uid="uid://lfvmh3qyshbr" path="res://Junk/Junk.gd" id="1_gv55k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_12j75"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_12j75"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_12j75"]
+radius = 3.8853838
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_12j75"]
+viewport_path = NodePath("ProgressSprite/SubViewport")
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_gv55k"]
+resource_local_to_scene = true
+
+[sub_resource type="Curve3D" id="Curve3D_gv55k"]
+
+[node name="Junk" type="RigidBody3D" unique_id=504002285]
+axis_lock_linear_y = true
+mass = 0.2
+gravity_scale = 0.0
+script = ExtResource("1_gv55k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2122793088]
+mesh = SubResource("BoxMesh_12j75")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=398095092]
+shape = SubResource("BoxShape3D_12j75")
+
+[node name="PickUpArea" type="Area3D" parent="." unique_id=1969828791]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUpArea" unique_id=2032305840]
+shape = SubResource("SphereShape3D_12j75")
+
+[node name="ProgressSprite" type="Sprite3D" parent="." unique_id=1504625397]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+top_level = true
+visible = false
+billboard = 1
+texture = SubResource("ViewportTexture_12j75")
+
+[node name="SubViewport" type="SubViewport" parent="ProgressSprite" unique_id=1479806378]
+size = Vector2i(250, 20)
+
+[node name="ProgressBar" type="ProgressBar" parent="ProgressSprite/SubViewport" unique_id=1422021371]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+max_value = 1.0
+
+[node name="PickUpTimer" type="Timer" parent="." unique_id=1621750877]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="RopeRenderer" type="MeshInstance3D" parent="." unique_id=1280558493]
+mesh = SubResource("ImmediateMesh_gv55k")
+
+[node name="RopePath" type="Path3D" parent="." unique_id=530660408]
+top_level = true
+curve = SubResource("Curve3D_gv55k")
+
+[node name="RopeMesh" type="CSGPolygon3D" parent="RopePath" unique_id=90822079]
+polygon = PackedVector2Array(-0.09237337, -0.064661324, -0.09853172, 0.03694935, -0.0523448, 0.104689896, 0.030790806, 0.1231645, 0.1170063, 0.083136074, 0.13855982, 0.009237373, 0.11084795, -0.076977916, -0.0030789375, -0.11700635)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false

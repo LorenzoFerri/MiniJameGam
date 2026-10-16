@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://coljocjn77pv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tiaq6"]
+size = Vector3(10, 2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icc1w"]
+albedo_color = Color(0.05973332, 0.4, 0.048000004, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_e8hbv"]
+material = SubResource("StandardMaterial3D_icc1w")
+size = Vector2(10, 10)
+
+[node name="PickupArea" type="Area3D" unique_id=1450150745]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=456084381]
+shape = SubResource("BoxShape3D_tiaq6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1400874100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0000001, 0)
+mesh = SubResource("PlaneMesh_e8hbv")
