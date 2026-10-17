@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Level/HUD.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="Layout" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Fuel" type="ProgressBar" parent="Layout"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 12.0
+grow_horizontal = 2
+mouse_filter = 2
+tooltip_text = "Fuel"
+max_value = 120.0
+step = 0.01
+value = 120.0
+show_percentage = false
+
+[node name="Status" type="MarginContainer" parent="Layout"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 24.0
+offset_right = -20.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Row" type="HBoxContainer" parent="Layout/Status"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 28
+
+[node name="Load" type="Label" parent="Layout/Status/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0/2"
+
+[node name="Money" type="Label" parent="Layout/Status/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "$0"
+
+[node name="Compass" type="Node2D" parent="Layout"]
+unique_name_in_owner = true
+visible = false
+
+[node name="Arrow" type="Polygon2D" parent="Layout/Compass"]
+polygon = PackedVector2Array(0, -10, 7, 8, 0, 4, -7, 8)
+color = Color(1, 0.55, 0.2, 1)
+
+[node name="EndRun" type="Label" parent="Layout"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+text = "E — End run"
+horizontal_alignment = 1
+vertical_alignment = 1
+

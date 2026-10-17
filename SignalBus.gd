@@ -6,7 +6,7 @@ signal credits
 
 # Game signals
 signal round_start
-signal round_end
+signal round_end(earnings: int)
 
 signal pause
 signal unpause

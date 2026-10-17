@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://b7jfdteiv5ivs"]
 
 [ext_resource type="Script" uid="uid://lfvmh3qyshbr" path="res://Junk/Junk.gd" id="1_gv55k"]
+[ext_resource type="Resource" path="res://Junk/Common.tres" id="2_resource"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_12j75"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_12j75"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_12j75"]
+resource_local_to_scene = true
 radius = 3.8853838
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_12j75"]
+resource_local_to_scene = true
 viewport_path = NodePath("ProgressSprite/SubViewport")
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_gv55k"]
@@ -22,6 +25,7 @@ axis_lock_linear_y = true
 mass = 0.2
 gravity_scale = 0.0
 script = ExtResource("1_gv55k")
+resource = ExtResource("2_resource")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2122793088]
 mesh = SubResource("BoxMesh_12j75")
@@ -59,6 +63,11 @@ max_value = 1.0
 
 [node name="PickUpTimer" type="Timer" parent="." unique_id=1621750877]
 unique_name_in_owner = true
+one_shot = true
+
+[node name="DeliveryTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 1.0
 one_shot = true
 
 [node name="RopeRenderer" type="MeshInstance3D" parent="." unique_id=1280558493]

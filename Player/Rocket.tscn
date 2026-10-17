@@ -35,6 +35,7 @@ material = SubResource("StandardMaterial3D_1bnvu")
 size = Vector2(0.2, 0.2)
 
 [node name="Rocket" type="RigidBody3D" unique_id=1538368647]
+axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 gravity_scale = 0.0

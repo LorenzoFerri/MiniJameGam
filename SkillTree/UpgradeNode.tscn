@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://sfqsf8f7d8ya"]
+
+[node name="Upgrade" type="Button" unique_id=1675964612]
+custom_minimum_size = Vector2(56, 56)
+offset_right = 56.0
+offset_bottom = 56.0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Owned" type="Label" parent="." unique_id=527636333]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = -2.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "✓"

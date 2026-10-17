@@ -1,12 +1,27 @@
 extends Node
 
-var asteroid_direction = Vector2(-1,1)
-var asteroid_count: int = 0
+const STARTING_DATA := preload("res://Player/StartingData.tres")
+
+var player_data: PlayerData = STARTING_DATA.duplicate(true)
 var player: Player
+var last_run_earnings: int = 0
 
 func _ready() -> void:
 	SignalBus.new_game.connect(new_game)
+	SignalBus.round_start.connect(start_run)
+	SignalBus.round_end.connect(_show_skill_tree)
 
 
 func new_game() -> void:
+	player_data = STARTING_DATA.duplicate(true)
+	start_run()
+
+
+func start_run() -> void:
+	last_run_earnings = 0
 	get_tree().change_scene_to_file("res://Level/Level.tscn")
+
+
+func _show_skill_tree(earnings: int) -> void:
+	last_run_earnings = earnings
+	get_tree().change_scene_to_file.call_deferred("res://SkillTree/SkillTree.tscn")

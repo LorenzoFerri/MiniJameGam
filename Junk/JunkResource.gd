@@ -8,3 +8,6 @@ enum Tier {
 	EPIC,
 	LEGENDARY
 }
+
+@export var tier: Tier = Tier.COMMON
+@export_range(1, 1000) var value: int = 10

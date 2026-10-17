@@ -1,0 +1,158 @@
+[gd_resource type="Resource" script_class="UpgradeCatalog" format=3 uid="uid://l86gsrvxmcmq"]
+
+[ext_resource type="Script" uid="uid://bpnuqmxv3emto" path="res://SkillTree/UpgradeCatalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://lfbgl63prcth" path="res://SkillTree/SkillUpgrade.gd" id="2_upgrade"]
+
+[sub_resource type="Resource" id="Upgrade_tank"]
+script = ExtResource("2_upgrade")
+id = &"fuel_tank"
+effect = "+30 fuel capacity"
+stat = &"fuel_capacity"
+addition = 30.0
+
+[sub_resource type="Resource" id="Upgrade_combustion"]
+script = ExtResource("2_upgrade")
+id = &"combustion"
+effect = "-25% propulsion fuel"
+cost = 30
+prerequisite = &"fuel_tank"
+stat = &"main_fuel_usage"
+multiplier = 0.75
+
+[sub_resource type="Resource" id="Upgrade_cold_gas"]
+script = ExtResource("2_upgrade")
+id = &"cold_gas"
+effect = "-50% steering fuel"
+cost = 60
+prerequisite = &"combustion"
+stat = &"turn_fuel_usage"
+multiplier = 0.5
+
+[sub_resource type="Resource" id="Upgrade_engine"]
+script = ExtResource("2_upgrade")
+id = &"engine"
+effect = "+40% forward thrust"
+stat = &"thruster_power"
+multiplier = 1.4
+
+[sub_resource type="Resource" id="Upgrade_reverse"]
+script = ExtResource("2_upgrade")
+id = &"reverse"
+effect = "+60% reverse thrust"
+cost = 30
+prerequisite = &"engine"
+stat = &"reverse_power"
+multiplier = 1.6
+
+[sub_resource type="Resource" id="Upgrade_cruise"]
+script = ExtResource("2_upgrade")
+id = &"cruise"
+effect = "-60% linear drag"
+cost = 60
+prerequisite = &"reverse"
+stat = &"friction"
+multiplier = 0.4
+
+[sub_resource type="Resource" id="Upgrade_steering"]
+script = ExtResource("2_upgrade")
+id = &"steering"
+effect = "+40% turning thrust"
+stat = &"turning_speed"
+multiplier = 1.4
+
+[sub_resource type="Resource" id="Upgrade_flywheel"]
+script = ExtResource("2_upgrade")
+id = &"flywheel"
+effect = "+60% rotation damping"
+cost = 30
+prerequisite = &"steering"
+stat = &"angular_friction"
+multiplier = 1.6
+
+[sub_resource type="Resource" id="Upgrade_braking"]
+script = ExtResource("2_upgrade")
+id = &"braking"
+effect = "-50% reverse fuel"
+cost = 60
+prerequisite = &"flywheel"
+stat = &"reverse_fuel_usage"
+multiplier = 0.5
+
+[sub_resource type="Resource" id="Upgrade_cargo"]
+script = ExtResource("2_upgrade")
+id = &"cargo"
+effect = "+1 cargo capacity"
+stat = &"capacity"
+addition = 1.0
+
+[sub_resource type="Resource" id="Upgrade_cargo_expansion"]
+script = ExtResource("2_upgrade")
+id = &"cargo_expansion"
+effect = "+1 cargo capacity"
+cost = 30
+prerequisite = &"cargo"
+stat = &"capacity"
+addition = 1.0
+
+[sub_resource type="Resource" id="Upgrade_extra_cargo"]
+script = ExtResource("2_upgrade")
+id = &"extra_cargo"
+effect = "+2 cargo capacity"
+cost = 60
+prerequisite = &"cargo_expansion"
+stat = &"capacity"
+addition = 2.0
+
+[sub_resource type="Resource" id="Upgrade_tractor"]
+script = ExtResource("2_upgrade")
+id = &"tractor"
+effect = "+35% pickup radius"
+stat = &"pickup_radius"
+multiplier = 1.35
+
+[sub_resource type="Resource" id="Upgrade_clamp"]
+script = ExtResource("2_upgrade")
+id = &"clamp"
+effect = "-50% pickup time"
+cost = 30
+prerequisite = &"tractor"
+stat = &"pickup_time"
+multiplier = 0.5
+
+[sub_resource type="Resource" id="Upgrade_instant_pickup"]
+script = ExtResource("2_upgrade")
+id = &"instant_pickup"
+effect = "Instant pickup"
+cost = 60
+prerequisite = &"clamp"
+stat = &"pickup_time"
+multiplier = 0.0
+
+[sub_resource type="Resource" id="Upgrade_sorting"]
+script = ExtResource("2_upgrade")
+id = &"sorting"
+effect = "+25% scrap value"
+stat = &"scrap_value"
+multiplier = 1.25
+
+[sub_resource type="Resource" id="Upgrade_smelting"]
+script = ExtResource("2_upgrade")
+id = &"smelting"
+effect = "+$5 per delivery"
+cost = 30
+prerequisite = &"sorting"
+stat = &"delivery_bonus"
+addition = 5.0
+
+[sub_resource type="Resource" id="Upgrade_reclamation"]
+script = ExtResource("2_upgrade")
+id = &"reclamation"
+effect = "+8 fuel per delivery"
+cost = 60
+prerequisite = &"smelting"
+stat = &"fuel_per_delivery"
+addition = 8.0
+
+[resource]
+script = ExtResource("1_catalog")
+upgrades = Array[ExtResource("2_upgrade")]([SubResource("Upgrade_tank"), SubResource("Upgrade_combustion"), SubResource("Upgrade_cold_gas"), SubResource("Upgrade_engine"), SubResource("Upgrade_reverse"), SubResource("Upgrade_cruise"), SubResource("Upgrade_steering"), SubResource("Upgrade_flywheel"), SubResource("Upgrade_braking"), SubResource("Upgrade_cargo"), SubResource("Upgrade_cargo_expansion"), SubResource("Upgrade_extra_cargo"), SubResource("Upgrade_tractor"), SubResource("Upgrade_clamp"), SubResource("Upgrade_instant_pickup"), SubResource("Upgrade_sorting"), SubResource("Upgrade_smelting"), SubResource("Upgrade_reclamation")])

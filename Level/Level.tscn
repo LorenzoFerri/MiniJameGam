@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c1suf70sf8vgt" path="res://Level/Level.gd" id="1_i5eh5"]
 [ext_resource type="PackedScene" uid="uid://gassisgg7cl" path="res://Player/Rocket.tscn" id="1_r3cbp"]
-[ext_resource type="PackedScene" uid="uid://b7jfdteiv5ivs" path="res://Junk/Junk.tscn" id="2_5noo7"]
 [ext_resource type="PackedScene" uid="uid://g3s0cf6avcwm" path="res://Junkyard/Junkyard.tscn" id="2_cyxyq"]
-[ext_resource type="PackedScene" uid="uid://coljocjn77pv" path="res://CollectionArea/CollectionArea.tscn" id="3_cyxyq"]
+[ext_resource type="PackedScene" path="res://Level/HUD.tscn" id="6_hud"]
 
 [sub_resource type="Environment" id="Environment_12j75"]
 background_mode = 1
@@ -16,28 +15,18 @@ ambient_light_energy = 0.2
 script = ExtResource("1_i5eh5")
 
 [node name="Rocket" parent="." unique_id=1538368647 instance=ExtResource("1_r3cbp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.280632, 0, -34.021786)
 
-[node name="Junk" parent="." unique_id=504002285 instance=ExtResource("2_5noo7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.012123, 0, -42.95477)
-
-[node name="Junk2" parent="." unique_id=850894155 instance=ExtResource("2_5noo7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.567307, 0, -44.502987)
-
-[node name="Junk3" parent="." unique_id=1517171971 instance=ExtResource("2_5noo7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.93509, 0, -45.132137)
-
-[node name="Junk4" parent="." unique_id=205067481 instance=ExtResource("2_5noo7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.46113, 0, -40.747005)
+[node name="JunkItems" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1906247675]
 environment = SubResource("Environment_12j75")
 
 [node name="Junkyard" parent="." unique_id=28662921 instance=ExtResource("2_cyxyq")]
 
-[node name="CollectionArea" parent="." unique_id=1450150745 instance=ExtResource("3_cyxyq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.012123, 0, -42.95477)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1475310122]
 transform = Transform3D(0.49999997, -0.75000006, 0.4330127, 0, 0.49999997, 0.86602545, -0.86602545, -0.4330127, 0.24999997, 0, 0, 0)
 light_color = Color(0.61, 0.90250003, 1, 1)
+
+[node name="Asteroids" type="Node3D" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]

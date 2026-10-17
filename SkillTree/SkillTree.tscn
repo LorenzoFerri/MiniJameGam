@@ -1,0 +1,359 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://SkillTree/SkillTree.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://SkillTree/UpgradeNode.tscn" id="2_node"]
+[ext_resource type="Script" path="res://SkillTree/TreeViewport.gd" id="3_view"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Resource.png" id="resource_png"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Capsule.png" id="capsule_png"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/SpaceShip.png" id="ship_png"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/SpaceShip_Flight.png" id="flight_png"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Warp.png" id="warp_png"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Hand.png" id="hand_png"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Wrench.png" id="wrench_png"]
+[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Transmitter.png" id="transmitter_png"]
+
+[sub_resource type="AtlasTexture" id="Icon_resource"]
+atlas = ExtResource("resource_png")
+region = Rect2(140, 140, 232, 232)
+
+[sub_resource type="AtlasTexture" id="Icon_capsule"]
+atlas = ExtResource("capsule_png")
+region = Rect2(132, 132, 248, 248)
+
+[sub_resource type="AtlasTexture" id="Icon_ship"]
+atlas = ExtResource("ship_png")
+region = Rect2(136, 136, 240, 240)
+
+[sub_resource type="AtlasTexture" id="Icon_flight"]
+atlas = ExtResource("flight_png")
+region = Rect2(138, 138, 236, 236)
+
+[sub_resource type="AtlasTexture" id="Icon_warp"]
+atlas = ExtResource("warp_png")
+region = Rect2(118, 118, 276, 276)
+
+[sub_resource type="AtlasTexture" id="Icon_hand"]
+atlas = ExtResource("hand_png")
+region = Rect2(149, 149, 214, 214)
+
+[sub_resource type="AtlasTexture" id="Icon_wrench"]
+atlas = ExtResource("wrench_png")
+region = Rect2(134, 134, 244, 244)
+
+[sub_resource type="AtlasTexture" id="Icon_transmitter"]
+atlas = ExtResource("transmitter_png")
+region = Rect2(101, 101, 310, 310)
+
+[node name="SkillTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Column" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Margin/Column"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Results" type="Label" parent="Margin/Column/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+$0"
+
+[node name="Money" type="Label" parent="Margin/Column/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "$0"
+
+[node name="TreeViewport" type="Control" parent="Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+clip_contents = true
+mouse_filter = 2
+script = ExtResource("3_view")
+
+[node name="Tree" type="Control" parent="Margin/Column/TreeViewport"]
+unique_name_in_owner = true
+texture_filter = 4
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 640.0
+mouse_filter = 2
+
+[node name="Links" type="Node2D" parent="Margin/Column/TreeViewport/Tree"]
+
+[node name="fuel_tank" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(480, 292, 480, 232)
+width = 2.0
+
+[node name="combustion" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(460.4, 176, 429.6, 132)
+width = 2.0
+
+[node name="cold_gas" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(435.79, 76, 454.21, 56)
+width = 2.0
+
+[node name="engine" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(508, 303.67, 572, 266.33)
+width = 2.0
+
+[node name="reverse" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(628, 237.08, 702, 202.92)
+width = 2.0
+
+[node name="cruise" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(755.45, 162, 804.55, 108)
+width = 2.0
+
+[node name="steering" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(508, 336.33, 572, 373.67)
+width = 2.0
+
+[node name="flywheel" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(628, 402.92, 702, 437.08)
+width = 2.0
+
+[node name="braking" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(755.45, 478, 804.55, 532)
+width = 2.0
+
+[node name="cargo" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(480, 348, 480, 412)
+width = 2.0
+
+[node name="cargo_expansion" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(499.6, 468, 530.4, 512)
+width = 2.0
+
+[node name="extra_cargo" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(522.78, 568, 507.22, 584)
+width = 2.0
+
+[node name="tractor" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(452, 336.33, 388, 373.67)
+width = 2.0
+
+[node name="clamp" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(332, 402.92, 258, 437.08)
+width = 2.0
+
+[node name="instant_pickup" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(204.55, 478, 155.45, 532)
+width = 2.0
+
+[node name="sorting" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(452, 303.67, 388, 266.33)
+width = 2.0
+
+[node name="smelting" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(332, 237.08, 258, 202.92)
+width = 2.0
+
+[node name="reclamation" type="Line2D" parent="Margin/Column/TreeViewport/Tree/Links"]
+points = PackedVector2Array(204.55, 162, 155.45, 108)
+width = 2.0
+
+[node name="Core" type="Button" parent="Margin/Column/TreeViewport/Tree"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 292.0
+offset_right = 508.0
+offset_bottom = 348.0
+disabled = true
+icon = SubResource("Icon_ship")
+icon_alignment = 1
+icon_max_width = 28
+expand_icon = true
+
+[node name="fuel_tank" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 452.0
+offset_top = 176.0
+offset_right = 508.0
+offset_bottom = 232.0
+icon = SubResource("Icon_resource")
+
+[node name="combustion" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 382.0
+offset_top = 76.0
+offset_right = 438.0
+offset_bottom = 132.0
+icon = SubResource("Icon_wrench")
+
+[node name="cold_gas" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 452.0
+offset_top = 0.0
+offset_right = 508.0
+offset_bottom = 56.0
+icon = SubResource("Icon_wrench")
+
+[node name="engine" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 572.0
+offset_top = 222.0
+offset_right = 628.0
+offset_bottom = 278.0
+icon = SubResource("Icon_flight")
+
+[node name="reverse" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 702.0
+offset_top = 162.0
+offset_right = 758.0
+offset_bottom = 218.0
+icon = SubResource("Icon_flight")
+
+[node name="cruise" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 802.0
+offset_top = 52.0
+offset_right = 858.0
+offset_bottom = 108.0
+icon = SubResource("Icon_warp")
+
+[node name="steering" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 572.0
+offset_top = 362.0
+offset_right = 628.0
+offset_bottom = 418.0
+icon = SubResource("Icon_ship")
+
+[node name="flywheel" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 702.0
+offset_top = 422.0
+offset_right = 758.0
+offset_bottom = 478.0
+icon = SubResource("Icon_wrench")
+
+[node name="braking" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 802.0
+offset_top = 532.0
+offset_right = 858.0
+offset_bottom = 588.0
+icon = SubResource("Icon_wrench")
+
+[node name="cargo" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 452.0
+offset_top = 412.0
+offset_right = 508.0
+offset_bottom = 468.0
+icon = SubResource("Icon_capsule")
+
+[node name="cargo_expansion" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 522.0
+offset_top = 512.0
+offset_right = 578.0
+offset_bottom = 568.0
+icon = SubResource("Icon_capsule")
+
+[node name="extra_cargo" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 452.0
+offset_top = 584.0
+offset_right = 508.0
+offset_bottom = 640.0
+icon = SubResource("Icon_capsule")
+
+[node name="tractor" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 332.0
+offset_top = 362.0
+offset_right = 388.0
+offset_bottom = 418.0
+icon = SubResource("Icon_transmitter")
+
+[node name="clamp" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 202.0
+offset_top = 422.0
+offset_right = 258.0
+offset_bottom = 478.0
+icon = SubResource("Icon_hand")
+
+[node name="instant_pickup" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 102.0
+offset_top = 532.0
+offset_right = 158.0
+offset_bottom = 588.0
+icon = SubResource("Icon_hand")
+
+[node name="sorting" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 332.0
+offset_top = 222.0
+offset_right = 388.0
+offset_bottom = 278.0
+icon = SubResource("Icon_resource")
+
+[node name="smelting" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 202.0
+offset_top = 162.0
+offset_right = 258.0
+offset_bottom = 218.0
+icon = SubResource("Icon_resource")
+
+[node name="reclamation" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
+offset_left = 102.0
+offset_top = 52.0
+offset_right = 158.0
+offset_bottom = 108.0
+icon = SubResource("Icon_resource")
+
+[node name="NextRun" type="Button" parent="Margin/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Next run"
+
+[node name="Details" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Details"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Column" type="VBoxContainer" parent="Details/Margin"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Effect" type="Label" parent="Details/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Cost" type="Label" parent="Details/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Requires" type="Label" parent="Details/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2

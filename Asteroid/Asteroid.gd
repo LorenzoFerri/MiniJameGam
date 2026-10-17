@@ -1,15 +1,22 @@
 extends CharacterBody3D
 
+signal escaped(asteroid: CharacterBody3D)
+
+@export var min_speed: float = 0.5
+@export var max_speed: float = 2.0
+
 var speed: float
+var direction := Vector3.FORWARD
 
 func _ready() -> void:
 	scale = randf_range(1.0, 5.0) * Vector3.ONE
-	speed = randf_range(1.0, 4.0)
+	speed = randf_range(min_speed, max_speed)
 
 func _physics_process(delta: float) -> void:
-	var direction = Vector3(GameManager.asteroid_direction.x, 0, GameManager.asteroid_direction.y)
-	move_and_collide(direction * delta * speed)
+	var collision := move_and_collide(direction * delta * speed)
+	if collision:
+		direction = direction.bounce(collision.get_normal()).normalized()
 	
-	if position.distance_to(GameManager.player.position) > 50:
-		queue_free()
-		GameManager.asteroid_count -= 1
+	if global_position.distance_to(GameManager.player.global_position) > 50:
+		set_physics_process(false)
+		escaped.emit(self)
