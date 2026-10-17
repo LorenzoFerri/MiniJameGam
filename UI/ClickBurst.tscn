@@ -1,4 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://chln8q2neilqs"]
+
+[sub_resource type="CanvasItemMaterial" id="Material_spark"]
+blend_mode = 1
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_spark"]
 offsets = PackedFloat32Array(0, 0.04, 0.1, 0.18, 0.38, 0.65, 1)
@@ -8,10 +12,10 @@ colors = PackedColorArray(4.5, 4.4, 4.2, 1, 4.5, 4.4, 4.2, 1, 1.8, 1.9, 2, 1, 0.
 gradient = SubResource("Gradient_spark")
 width = 128
 height = 256
+use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.055)
 fill_to = Vector2(0.5, 0.75)
-use_hdr = true
 
 [sub_resource type="Gradient" id="Gradient_lifetime"]
 offsets = PackedFloat32Array(0, 0.15, 0.45, 0.68, 1)
@@ -21,45 +25,39 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.7, 0.88, 1, 0.7, 0.5, 0.75, 
 gradient = SubResource("Gradient_lifetime")
 
 [sub_resource type="ParticleProcessMaterial" id="Material_sparks"]
-particle_flag_disable_z = true
 particle_flag_align_y = true
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 1.5
-direction = Vector3(1, 0, 0)
 spread = 180.0
-gravity = Vector3(0, 22, 0)
 initial_velocity_min = 210.0
 initial_velocity_max = 360.0
+gravity = Vector3(0, 22, 0)
 damping_min = 400.0
 damping_max = 520.0
 scale_min = 0.065
 scale_max = 0.1
 color_ramp = SubResource("Texture_lifetime")
 
-[sub_resource type="CanvasItemMaterial" id="Material_spark"]
-blend_mode = 1
-light_mode = 1
-
-[node name="ClickBurst" type="CanvasLayer"]
+[node name="ClickBurst" type="CanvasLayer" unique_id=663477430]
 process_mode = 3
 layer = 100
 
-[node name="Sparks" type="GPUParticles2D" parent="."]
+[node name="Sparks" type="GPUParticles2D" parent="." unique_id=818406526]
 texture_filter = 2
 material = SubResource("Material_spark")
 emitting = false
 amount = 18
-process_material = SubResource("Material_sparks")
 texture = SubResource("Texture_spark")
 lifetime = 0.55
 one_shot = true
 explosiveness = 1.0
 randomness = 0.3
 fixed_fps = 120
+visibility_rect = Rect2(-128, -128, 256, 256)
 trail_enabled = true
 trail_lifetime = 0.14
 trail_sections = 12
-trail_section_subdivisions = 4
-visibility_rect = Rect2(-128, -128, 256, 256)
+process_material = SubResource("Material_sparks")
 
 [connection signal="finished" from="Sparks" to="." method="queue_free"]

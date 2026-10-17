@@ -1,0 +1,481 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://RunEnd/RunEnd.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://Space/SpaceBackground.tscn" id="2_space"]
+[ext_resource type="Theme" path="res://UI/InterfaceTheme.tres" id="3_theme"]
+[ext_resource type="Texture2D" path="res://RunEnd/Art/TrashBag.png" id="4_bag"]
+[ext_resource type="Texture2D" path="res://RunEnd/Art/JunkCube.png" id="5_cube"]
+
+[sub_resource type="Gradient" id="Gradient_dust"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(0.62, 0.64, 0.63, 0.38, 0.48, 0.52, 0.53, 0.22, 0.38, 0.42, 0.44, 0)
+
+[sub_resource type="GradientTexture2D" id="Texture_dust"]
+gradient = SubResource("Gradient_dust")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_fade"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.65, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="Texture_fade"]
+gradient = SubResource("Gradient_fade")
+
+[sub_resource type="ParticleProcessMaterial" id="Material_dust"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(155, 1, 0)
+direction = Vector3(0, -1, 0)
+spread = 82.0
+gravity = Vector3(0, 35, 0)
+initial_velocity_min = 45.0
+initial_velocity_max = 115.0
+damping_min = 35.0
+damping_max = 60.0
+scale_min = 0.24
+scale_max = 0.6
+color_ramp = SubResource("Texture_fade")
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stage/Machine/Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -142)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stage/Machine/Piston:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stage/Machine/Chamber:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-198, -142)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Stage/Machine/Chamber:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(396, 298)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Stage/Machine/Chamber/Contents:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(198, 298)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Stage/Machine/Chamber/Contents/Bags:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Stage/Machine/Chamber/Contents/Bags:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Stage/Machine/Chamber/Contents/Cube:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Stage/Machine/Dust:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Stage/Machine:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Stage/Earnings:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_compact"]
+resource_name = "compact"
+length = 4.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stage/Machine/Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45, 1.05, 1.6, 1.96, 2.7, 4.15),
+"transitions": PackedFloat32Array(1, 2.2, 2.8, 1, 0.6, 1, 1),
+"update": 0,
+"values": [Vector2(0, -142), Vector2(0, -142), Vector2(0, -60), Vector2(0, 148), Vector2(0, 148), Vector2(0, -142), Vector2(0, -142)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stage/Machine/Piston:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45, 1.05, 1.6, 1.96, 2.7, 4.15),
+"transitions": PackedFloat32Array(1, 2.2, 2.8, 1, 0.6, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.2400), Vector2(1, 0.2400), Vector2(1, 1.0600), Vector2(1, 3.1400), Vector2(1, 3.1400), Vector2(1, 0.2400), Vector2(1, 0.2400)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stage/Machine/Chamber:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.45, 1.05, 1.6, 1.96, 2.7, 4.15),
+"transitions": PackedFloat32Array(1, 2.2, 2.8, 1, 0.6, 1, 1),
+"update": 0,
+"values": [Vector2(-198, -142), Vector2(-198, -142), Vector2(-198, -60), Vector2(-198, 148), Vector2(-198, 148), Vector2(-198, -142), Vector2(-198, -142)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Stage/Machine/Chamber:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.45, 1.05, 1.6, 1.96, 2.7, 4.15),
+"transitions": PackedFloat32Array(1, 2.2, 2.8, 1, 0.6, 1, 1),
+"update": 0,
+"values": [Vector2(396, 298), Vector2(396, 298), Vector2(396, 216), Vector2(396, 8), Vector2(396, 8), Vector2(396, 298), Vector2(396, 298)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Stage/Machine/Chamber/Contents:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.45, 1.05, 1.6, 1.96, 2.7, 4.15),
+"transitions": PackedFloat32Array(1, 2.2, 2.8, 1, 0.6, 1, 1),
+"update": 0,
+"values": [Vector2(198, 298), Vector2(198, 298), Vector2(198, 216), Vector2(198, 8), Vector2(198, 8), Vector2(198, 298), Vector2(198, 298)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Stage/Machine/Chamber/Contents/Bags:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.05, 1.6),
+"transitions": PackedFloat32Array(1, 2.8, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.12, 0.035)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Stage/Machine/Chamber/Contents/Bags:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Stage/Machine/Chamber/Contents/Cube:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Stage/Machine/Dust:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Stage/Machine:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.6, 1.63, 1.67, 1.73, 1.82),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 4), Vector2(0, -2), Vector2(0, 1), Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Stage/Earnings:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 2.6, 2.95),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="Library_press"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"compact": SubResource("Animation_compact")
+}
+
+[node name="RunEnd" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_script")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_space")]
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.006, 0.009, 0.014, 0.65)
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="Machine" type="Node2D" parent="Stage"]
+
+[node name="Frame" type="Node2D" parent="Stage/Machine"]
+
+[node name="LeftRail" type="ColorRect" parent="Stage/Machine/Frame"]
+offset_left = -236.0
+offset_top = -228.0
+offset_right = -199.0
+offset_bottom = 174.0
+mouse_filter = 2
+color = Color(0.2, 0.22, 0.24, 1)
+
+[node name="RightRail" type="ColorRect" parent="Stage/Machine/Frame"]
+offset_left = 199.0
+offset_top = -228.0
+offset_right = 236.0
+offset_bottom = 174.0
+mouse_filter = 2
+color = Color(0.2, 0.22, 0.24, 1)
+
+[node name="TopBeam" type="ColorRect" parent="Stage/Machine/Frame"]
+offset_left = -245.0
+offset_top = -238.0
+offset_right = 245.0
+offset_bottom = -192.0
+mouse_filter = 2
+color = Color(0.28, 0.3, 0.32, 1)
+
+[node name="Base" type="ColorRect" parent="Stage/Machine/Frame"]
+offset_left = -240.0
+offset_top = 156.0
+offset_right = 240.0
+offset_bottom = 191.0
+mouse_filter = 2
+color = Color(0.28, 0.3, 0.32, 1)
+
+[node name="Piston" type="Node2D" parent="Stage/Machine"]
+position = Vector2(0, -202)
+scale = Vector2(1, 0.24)
+
+[node name="Metal" type="ColorRect" parent="Stage/Machine/Piston"]
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 100.0
+mouse_filter = 2
+color = Color(0.5, 0.55, 0.58, 1)
+
+[node name="Chamber" type="Control" parent="Stage/Machine"]
+layout_mode = 0
+offset_left = -198.0
+offset_top = -142.0
+offset_right = 198.0
+offset_bottom = 156.0
+mouse_filter = 2
+clip_contents = true
+
+[node name="Contents" type="Node2D" parent="Stage/Machine/Chamber"]
+position = Vector2(198, 298)
+
+[node name="Bags" type="Node2D" parent="Stage/Machine/Chamber/Contents"]
+
+[node name="Rear" type="Sprite2D" parent="Stage/Machine/Chamber/Contents/Bags"]
+position = Vector2(-15, -70)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_bag")
+centered = false
+offset = Vector2(-100, -245)
+
+[node name="Left" type="Sprite2D" parent="Stage/Machine/Chamber/Contents/Bags"]
+position = Vector2(-82, 0)
+rotation = -0.07
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("4_bag")
+centered = false
+offset = Vector2(-100, -245)
+
+[node name="Right" type="Sprite2D" parent="Stage/Machine/Chamber/Contents/Bags"]
+position = Vector2(82, 0)
+rotation = 0.08
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_bag")
+centered = false
+offset = Vector2(-100, -245)
+
+[node name="Front" type="Sprite2D" parent="Stage/Machine/Chamber/Contents/Bags"]
+position = Vector2(0, 2)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("4_bag")
+centered = false
+offset = Vector2(-100, -245)
+
+[node name="Cube" type="Sprite2D" parent="Stage/Machine/Chamber/Contents"]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_cube")
+centered = false
+offset = Vector2(-171.5, -332)
+
+[node name="Head" type="Node2D" parent="Stage/Machine"]
+position = Vector2(0, -142)
+
+[node name="Plate" type="ColorRect" parent="Stage/Machine/Head"]
+offset_left = -198.0
+offset_top = -36.0
+offset_right = 198.0
+mouse_filter = 2
+color = Color(0.4, 0.43, 0.45, 1)
+
+[node name="Dust" type="GPUParticles2D" parent="Stage/Machine"]
+position = Vector2(0, 147)
+emitting = false
+amount = 24
+process_material = SubResource("Material_dust")
+texture = SubResource("Texture_dust")
+lifetime = 0.65
+one_shot = true
+explosiveness = 1.0
+randomness = 0.25
+visibility_rect = Rect2(-240, -180, 480, 260)
+
+[node name="Earnings" type="Label" parent="Stage"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+offset_left = -150.0
+offset_top = 228.0
+offset_right = 150.0
+offset_bottom = 271.0
+theme_override_font_sizes/font_size = 28
+text = "+$0"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("Library_press")
+}
+autoplay = "compact"
+

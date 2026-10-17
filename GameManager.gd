@@ -9,7 +9,7 @@ var last_run_earnings: int = 0
 func _ready() -> void:
 	SignalBus.new_game.connect(new_game)
 	SignalBus.round_start.connect(start_run)
-	SignalBus.round_end.connect(_show_skill_tree)
+	SignalBus.round_end.connect(_finish_run)
 
 
 func new_game() -> void:
@@ -22,6 +22,9 @@ func start_run() -> void:
 	Interface.change_scene("res://Level/Level.tscn")
 
 
-func _show_skill_tree(earnings: int) -> void:
+func _finish_run(earnings: int) -> void:
 	last_run_earnings = earnings
-	Interface.change_scene("res://SkillTree/SkillTree.tscn")
+	if earnings > 0:
+		Interface.change_scene("res://RunEnd/RunEnd.tscn")
+	else:
+		Interface.change_scene("res://SkillTree/SkillTree.tscn")
