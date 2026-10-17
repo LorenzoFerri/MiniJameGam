@@ -5,14 +5,20 @@
 [ext_resource type="PackedScene" uid="uid://g3s0cf6avcwm" path="res://Junkyard/Junkyard.tscn" id="2_cyxyq"]
 [ext_resource type="PackedScene" path="res://Level/HUD.tscn" id="6_hud"]
 
+[ext_resource type="PackedScene" path="res://Space/SpaceBackground.tscn" id="7_space"]
+
 [sub_resource type="Environment" id="Environment_12j75"]
-background_mode = 1
+background_mode = 3
+background_canvas_max_layer = -1
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.2
 
 [node name="World" type="Node3D" unique_id=1966058354]
 script = ExtResource("1_i5eh5")
+
+[node name="SpaceBackground" parent="." node_paths=PackedStringArray("parallax_target") instance=ExtResource("7_space")]
+parallax_target = NodePath("../Rocket")
 
 [node name="Rocket" parent="." unique_id=1538368647 instance=ExtResource("1_r3cbp")]
 

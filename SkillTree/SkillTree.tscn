@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://SkillTree/SkillTree.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://SkillTree/UpgradeNode.tscn" id="2_node"]
 [ext_resource type="Script" path="res://SkillTree/TreeViewport.gd" id="3_view"]
+[ext_resource type="PackedScene" path="res://Space/SpaceBackground.tscn" id="4_space"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Resource.png" id="resource_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Capsule.png" id="capsule_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/SpaceShip.png" id="ship_png"]
@@ -53,13 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SpaceBackground" parent="." instance=ExtResource("4_space")]
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1

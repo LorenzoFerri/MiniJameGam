@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c75wi2783ugqo"]
+
+[ext_resource type="Shader" uid="uid://bpu2pl00p4ve3" path="res://Space/Space.gdshader" id="1_shader"]
+[ext_resource type="Script" uid="uid://djbanutn1gie1" path="res://Space/SpaceBackground.gd" id="2_script"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dust"]
+resource_name = "Interstellar dust lanes"
+seed = 42
+frequency = 0.008
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dust"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_dust")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nebula"]
+resource_name = "Fractal nebula structure"
+noise_type = 5
+seed = 17
+frequency = 0.006
+fractal_octaves = 6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nebula"]
+resource_name = "Seamless nebula flow"
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_nebula")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_stars"]
+resource_name = "Star placement"
+noise_type = 5
+seed = 83
+frequency = 1.0
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_stars"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_stars")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_space"]
+resource_local_to_scene = true
+shader = ExtResource("1_shader")
+shader_parameter/nebula_noise = SubResource("NoiseTexture2D_nebula")
+shader_parameter/dust_noise = SubResource("NoiseTexture2D_dust")
+shader_parameter/star_noise = SubResource("NoiseTexture2D_stars")
+shader_parameter/outer_gas_color = Color(0.12497177, 0.19687715, 0.4575594, 1)
+shader_parameter/ionized_gas_color = Color(0.66, 0.39, 0.57, 1)
+shader_parameter/core_color = Color(0.5826556, 0.77979064, 1, 1)
+shader_parameter/hydrogen_color = Color(0.25, 0.035, 0.055, 1)
+shader_parameter/cloud_scale = 0.5240000216301199
+shader_parameter/warp_strength = 0.37600001786
+shader_parameter/cloud_brightness = 1.00000004424012
+shader_parameter/dust_strength = 0.838000039805
+shader_parameter/animation_speed = 0.010000000475
+shader_parameter/cool_star_color = Color(0.55, 0.77, 1, 1)
+shader_parameter/warm_star_color = Color(1, 0.86, 0.66, 1)
+shader_parameter/star_brightness = 1.0
+shader_parameter/twinkle_strength = 0.25
+shader_parameter/background_color = Color(0.005, 0.008, 0.015, 1)
+shader_parameter/vignette_strength = 0.6000000285
+shader_parameter/parallax_strength = 0.010000000475
+shader_parameter/nebula_parallax = 0.046000002185
+shader_parameter/dust_parallax = 0.15600000741
+shader_parameter/viewer_position = Vector2(-3.58, 0)
+
+[node name="SpaceBackground" type="CanvasLayer" unique_id=1835578031]
+layer = -1
+script = ExtResource("2_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=854254499]
+material = SubResource("ShaderMaterial_space")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b546rbg17xvyd"]
 
 [ext_resource type="Script" uid="uid://k7lcmm5ydhqr" path="res://MainMenu/MainMenu.gd" id="1_otibh"]
+[ext_resource type="PackedScene" path="res://Space/SpaceBackground.tscn" id="2_space"]
 
 [node name="MainMenu" type="Control" unique_id=1891506696]
 layout_mode = 3
@@ -10,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_otibh")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_space")]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=101604962]
 layout_mode = 1
