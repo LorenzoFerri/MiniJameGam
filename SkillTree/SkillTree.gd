@@ -8,6 +8,7 @@ var hovered_button: Button
 
 
 func _ready() -> void:
+	%Menu.pressed.connect(Interface.toggle_pause)
 	%NextRun.pressed.connect(SignalBus.round_start.emit)
 	%NextRun.focus_entered.connect(_hide_details)
 	%Results.text = "+$%d" % GameManager.last_run_earnings

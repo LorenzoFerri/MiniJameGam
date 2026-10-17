@@ -19,9 +19,9 @@ func new_game() -> void:
 
 func start_run() -> void:
 	last_run_earnings = 0
-	get_tree().change_scene_to_file("res://Level/Level.tscn")
+	Interface.change_scene("res://Level/Level.tscn")
 
 
 func _show_skill_tree(earnings: int) -> void:
 	last_run_earnings = earnings
-	get_tree().change_scene_to_file.call_deferred("res://SkillTree/SkillTree.tscn")
+	Interface.change_scene("res://SkillTree/SkillTree.tscn")

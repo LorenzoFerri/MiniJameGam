@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://UI/Interface.gd" id="1_interface"]
+[ext_resource type="PackedScene" path="res://UI/PauseMenu.tscn" id="2_pause"]
+
+[node name="Interface" type="CanvasLayer"]
+process_mode = 3
+layer = 200
+script = ExtResource("1_interface")
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="PauseMenu" parent="PauseLayer" instance=ExtResource("2_pause")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Curtain" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.005, 0.008, 0.015, 0)

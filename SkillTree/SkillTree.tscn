@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://SkillTree/SkillTree.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://SkillTree/UpgradeNode.tscn" id="2_node"]
 [ext_resource type="Script" path="res://SkillTree/TreeViewport.gd" id="3_view"]
 [ext_resource type="PackedScene" path="res://Space/SpaceBackground.tscn" id="4_space"]
 [ext_resource type="Theme" path="res://SkillTree/UpgradeTheme.tres" id="5_theme"]
+[ext_resource type="Theme" path="res://UI/InterfaceTheme.tres" id="6_interface_theme"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Resource.png" id="resource_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Capsule.png" id="capsule_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/SpaceShip.png" id="ship_png"]
@@ -38,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_interface_theme")
 script = ExtResource("1_script")
 
 [node name="SpaceBackground" parent="." instance=ExtResource("4_space")]
@@ -49,27 +51,55 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
 [node name="Column" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 16
 
 [node name="Header" type="HBoxContainer" parent="Margin/Column"]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Results" type="Label" parent="Margin/Column/Header"]
+[node name="Title" type="Label" parent="Margin/Column/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_type_variation = &"SectionTitle"
+text = "Upgrades"
+
+[node name="LastRun" type="VBoxContainer" parent="Margin/Column/Header"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Margin/Column/Header/LastRun"]
+layout_mode = 2
+theme_type_variation = &"Caption"
+text = "Last run"
+
+[node name="Results" type="Label" parent="Margin/Column/Header/LastRun"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"StatValue"
 text = "+$0"
 
-[node name="Money" type="Label" parent="Margin/Column/Header"]
+[node name="Balance" type="VBoxContainer" parent="Margin/Column/Header"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Margin/Column/Header/Balance"]
+layout_mode = 2
+theme_type_variation = &"Caption"
+text = "Money"
+
+[node name="Money" type="Label" parent="Margin/Column/Header/Balance"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"StatValue"
 text = "$0"
 
 [node name="TreeViewport" type="Control" parent="Margin/Column"]
@@ -303,10 +333,30 @@ offset_right = 158.0
 offset_bottom = 108.0
 icon = SubResource("Icon_wrench")
 
-[node name="NextRun" type="Button" parent="Margin/Column"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 40)
+[node name="Footer" type="HBoxContainer" parent="Margin/Column"]
 layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Hint" type="Label" parent="Margin/Column/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_type_variation = &"Caption"
+text = "Scroll: zoom   ·   Middle mouse: pan   ·   Home: center"
+autowrap_mode = 3
+
+[node name="Menu" type="Button" parent="Margin/Column/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+tooltip_text = "Menu (Esc)"
+text = "Menu"
+
+[node name="NextRun" type="Button" parent="Margin/Column/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 2
+theme_type_variation = &"PrimaryButton"
 text = "Next run"
 
 [node name="Details" type="PanelContainer" parent="."]
@@ -318,14 +368,15 @@ mouse_filter = 2
 [node name="Margin" type="MarginContainer" parent="Details"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="Column" type="VBoxContainer" parent="Details/Margin"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 6
 
 [node name="Effect" type="Label" parent="Details/Margin/Column"]
 unique_name_in_owner = true
@@ -341,3 +392,4 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+theme_type_variation = &"Caption"
