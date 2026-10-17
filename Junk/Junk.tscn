@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://lfvmh3qyshbr" path="res://Junk/Junk.gd" id="1_gv55k"]
 [ext_resource type="Resource" path="res://Junk/Common.tres" id="2_resource"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_12j75"]
+[ext_resource type="PackedScene" uid="uid://l77vgxu8ityd" path="res://Junk/Models/BrokenRocketEngine.fbx" id="3_model"]
+[ext_resource type="PackedScene" uid="uid://cpn7hq4t5hs40" path="res://Junk/Models/CrashedRocket.fbx" id="4_model"]
+[ext_resource type="PackedScene" uid="uid://dwhkca7pnqc06" path="res://Junk/Models/HalfShell.fbx" id="5_model"]
+[ext_resource type="PackedScene" uid="uid://nng8g1uv4ag4" path="res://Junk/Models/MetalScrap1.fbx" id="6_model"]
+[ext_resource type="PackedScene" uid="uid://1gkq5qxq4jii" path="res://Junk/Models/MetalScrap2.fbx" id="7_model"]
+[ext_resource type="PackedScene" uid="uid://kc2wqrddoqdc" path="res://Junk/Models/SatelliteDish.fbx" id="8_model"]
+[ext_resource type="PackedScene" uid="uid://ce56auro50hk8" path="res://Junk/Models/SolarPanels.fbx" id="9_model"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_12j75"]
 
@@ -12,7 +17,6 @@ resource_local_to_scene = true
 radius = 3.8853838
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_12j75"]
-resource_local_to_scene = true
 viewport_path = NodePath("ProgressSprite/SubViewport")
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_gv55k"]
@@ -26,9 +30,17 @@ mass = 0.2
 gravity_scale = 0.0
 script = ExtResource("1_gv55k")
 resource = ExtResource("2_resource")
+models = Dictionary[PackedScene, Transform3D]({
+ExtResource("3_model"): Transform3D(0.92733896, 0, 0, 0, 0.92733896, 0, 0, 0, 0.92733896, 0, -0.62944543, -2.7636855e-08),
+ExtResource("4_model"): Transform3D(0.61477506, 0, 0, 0, 0.61477506, 0, 0, 0, 0.61477506, 0.110585384, -0.66732156, 0.022023482),
+ExtResource("5_model"): Transform3D(1.3658906, 0, 0, 0, 1.3658906, 0, 0, 0, 1.3658906, 0, -0.58104825, 0.27471915),
+ExtResource("6_model"): Transform3D(0.39580226, 0, 0, 0, 0.39580226, 0, 0, 0, 0.39580226, 0, 0, -0.0052802837),
+ExtResource("7_model"): Transform3D(0.29119208, 0, 0, 0, 0.29119208, 0, 0, 0, 0.29119208, 0.03713696, 0, 0.067848705),
+ExtResource("8_model"): Transform3D(0.73173416, 0, 0, 0, 0.73173416, 0, 0, 0, 0.73173416, -2.616885e-07, 0.2217815, 1.7445902e-07),
+ExtResource("9_model"): Transform3D(0.49340653, 0, 0, 0, 0.49340653, 0, 0, 0, 0.49340653, -0.004282839, -0.8779016, 0)
+})
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2122793088]
-mesh = SubResource("BoxMesh_12j75")
+[node name="Visual" type="Node3D" parent="." unique_id=1631539843]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=398095092]
 shape = SubResource("BoxShape3D_12j75")
@@ -65,9 +77,8 @@ max_value = 1.0
 unique_name_in_owner = true
 one_shot = true
 
-[node name="DeliveryTimer" type="Timer" parent="."]
+[node name="DeliveryTimer" type="Timer" parent="." unique_id=1449525416]
 unique_name_in_owner = true
-wait_time = 1.0
 one_shot = true
 
 [node name="RopeRenderer" type="MeshInstance3D" parent="." unique_id=1280558493]

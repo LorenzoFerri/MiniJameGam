@@ -5,6 +5,7 @@ signal pickup_requested(junk: Junk)
 signal delivery_completed(junk: Junk)
 
 @export var resource: JunkResource
+@export var models: Dictionary[PackedScene, Transform3D]
 
 var picked_up = false
 var pickup_enabled: bool = false
@@ -20,6 +21,11 @@ const ROPE_SEGMENTS = 16
 const MAX_SAG = 5.0
 
 func _ready() -> void:
+	var selected_model: PackedScene = models.keys().pick_random()
+	var model: Node3D = selected_model.instantiate()
+	model.transform = models[selected_model]
+	$Visual.add_child(model)
+
 	var data: PlayerData = GameManager.player_data
 	pickup_time = data.stat(&"pickup_time", pickup_time)
 	if pickup_time > 0:

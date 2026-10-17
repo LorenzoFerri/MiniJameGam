@@ -1,0 +1,34 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bofti4wod3vbh"]
+
+[sub_resource type="Gradient" id="Gradient_stone"]
+colors = PackedColorArray(0.62, 0.6, 0.56, 1, 1, 0.97, 0.91, 1)
+
+[sub_resource type="FastNoiseLite" id="Noise_rock"]
+seed = 83
+frequency = 0.018
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="Texture_stone"]
+noise = SubResource("Noise_rock")
+color_ramp = SubResource("Gradient_stone")
+seamless = true
+
+[sub_resource type="NoiseTexture2D" id="Texture_normal"]
+noise = SubResource("Noise_rock")
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+
+[resource]
+resource_name = "Asteroid rock"
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.3, 0.28, 0.255, 1)
+albedo_texture = SubResource("Texture_stone")
+metallic_specular = 0.25
+roughness = 0.94
+normal_enabled = true
+normal_scale = 0.65
+normal_texture = SubResource("Texture_normal")
+uv1_scale = Vector3(140, 140, 140)
+uv1_triplanar = true

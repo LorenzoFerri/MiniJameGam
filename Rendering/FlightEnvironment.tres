@@ -1,0 +1,35 @@
+[gd_resource type="Environment" format=3 uid="uid://b0v7ohkxw5jr0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMaterial_reflections"]
+sky_top_color = Color(0.025, 0.04, 0.08, 1)
+sky_horizon_color = Color(0.34, 0.39, 0.5, 1)
+sky_energy_multiplier = 0.7
+ground_bottom_color = Color(0.012, 0.016, 0.028, 1)
+ground_horizon_color = Color(0.2, 0.24, 0.34, 1)
+ground_energy_multiplier = 0.7
+sun_angle_max = 12.0
+
+[sub_resource type="Sky" id="Sky_reflections"]
+sky_material = SubResource("SkyMaterial_reflections")
+
+[resource]
+resource_name = "Flight environment"
+background_mode = 3
+background_canvas_max_layer = -1
+sky = SubResource("Sky_reflections")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 4
+tonemap_exposure = 1.1
+ssao_enabled = true
+ssao_radius = 0.6
+ssao_intensity = 1.1
+ssao_power = 1.6
+ssao_light_affect = 0.25
+glow_enabled = true
+glow_intensity = 0.22
+glow_strength = 0.8
+glow_hdr_threshold = 1.3
+adjustment_enabled = true
+adjustment_contrast = 1.03
+adjustment_saturation = 0.94

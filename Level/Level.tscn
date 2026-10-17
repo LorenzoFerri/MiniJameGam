@@ -6,13 +6,7 @@
 [ext_resource type="PackedScene" path="res://Level/HUD.tscn" id="6_hud"]
 
 [ext_resource type="PackedScene" path="res://Space/SpaceBackground.tscn" id="7_space"]
-
-[sub_resource type="Environment" id="Environment_12j75"]
-background_mode = 3
-background_canvas_max_layer = -1
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.2
+[ext_resource type="Environment" path="res://Rendering/FlightEnvironment.tres" id="8_environment"]
 
 [node name="World" type="Node3D" unique_id=1966058354]
 script = ExtResource("1_i5eh5")
@@ -25,13 +19,24 @@ parallax_target = NodePath("../Rocket")
 [node name="JunkItems" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1906247675]
-environment = SubResource("Environment_12j75")
+environment = ExtResource("8_environment")
 
 [node name="Junkyard" parent="." unique_id=28662921 instance=ExtResource("2_cyxyq")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1475310122]
-transform = Transform3D(0.49999997, -0.75000006, 0.4330127, 0, 0.49999997, 0.86602545, -0.86602545, -0.4330127, 0.24999997, 0, 0, 0)
-light_color = Color(0.61, 0.90250003, 1, 1)
+rotation = Vector3(-0.7853982, -0.6108652, 0)
+light_color = Color(1, 0.91, 0.78, 1)
+light_energy = 2.0
+light_angular_distance = 1.2
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 0.8
+directional_shadow_max_distance = 64.0
+
+[node name="RimLight" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.4363323, 2.3561945, 0)
+light_color = Color(0.38, 0.55, 1, 1)
+light_energy = 1.3
 
 [node name="Asteroids" type="Node3D" parent="."]
 

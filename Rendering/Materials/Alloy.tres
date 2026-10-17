@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+resource_name = "Brushed alloy"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.64, 0.67, 0.71, 1)
+metallic = 0.7
+roughness = 0.38

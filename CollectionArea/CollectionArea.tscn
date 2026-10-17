@@ -4,6 +4,8 @@
 size = Vector3(10, 2, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icc1w"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.05973332, 0.4, 0.048000004, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e8hbv"]

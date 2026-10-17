@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+resource_name = "Painted fins"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.52, 0.032, 0.018, 1)
+metallic = 0.15
+roughness = 0.37
+clearcoat_enabled = true
+clearcoat = 0.35
+clearcoat_roughness = 0.25

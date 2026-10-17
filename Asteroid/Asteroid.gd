@@ -4,12 +4,15 @@ signal escaped(asteroid: CharacterBody3D)
 
 @export var min_speed: float = 0.5
 @export var max_speed: float = 2.0
+@export var min_scale: float = 1.0
+@export var max_scale: float = 5.0
 
 var speed: float
 var direction := Vector3.FORWARD
 
 func _ready() -> void:
-	scale = randf_range(1.0, 5.0) * Vector3.ONE
+	scale = randf_range(min_scale, max_scale) * Vector3.ONE
+	rotation = Vector3(randf(), randf(), randf()) * TAU
 	speed = randf_range(min_speed, max_speed)
 
 func _physics_process(delta: float) -> void:

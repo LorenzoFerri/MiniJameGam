@@ -4,7 +4,11 @@
 size = Vector3(10, 2, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwwe3"]
-albedo_color = Color(0.72, 0.27648002, 0.08640001, 1)
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.055, 0.065, 0.08, 1)
+metallic = 0.55
+roughness = 0.72
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_12j75"]
 material = SubResource("StandardMaterial3D_wwwe3")
@@ -15,9 +19,11 @@ radius = 8.0
 height = 24.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shield"]
+diffuse_mode = 3
+specular_mode = 1
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.4, 0.8, 1, 0.08)
+albedo_color = Color(0.25, 0.55, 0.8, 0.025)
 
 [sub_resource type="SphereMesh" id="SphereMesh_shield"]
 material = SubResource("StandardMaterial3D_shield")
