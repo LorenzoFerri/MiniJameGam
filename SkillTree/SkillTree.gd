@@ -27,11 +27,11 @@ func _ready() -> void:
 func _refresh() -> void:
 	%Money.text = "$%d" % data.money
 	for upgrade: SkillUpgrade in PlayerData.UPGRADES.upgrades:
-		var button: Button = %Tree.get_node(NodePath(upgrade.id))
-		button.get_node("Owned").visible = data.unlocked.has(upgrade.id)
-		button.disabled = not data.can_unlock(upgrade)
-		var available := upgrade.prerequisite.is_empty() or data.unlocked.has(upgrade.prerequisite)
-		%Tree.get_node("Links/" + upgrade.id).default_color = get_theme_color("font_color" if available else "font_disabled_color", "Button")
+		var button: UpgradeNode = %Tree.get_node(NodePath(upgrade.id))
+		button.refresh(upgrade, data)
+		var link: Line2D = %Tree.get_node("Links/" + upgrade.id)
+		link.default_color = button.get_theme_color(&"link_color")
+		link.antialiased = true
 	if hovered:
 		_show_details(hovered, hovered_button)
 

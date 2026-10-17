@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SignalBus="*uid://3lrgrje7sj8g"
 GameManager="*uid://b1lw4kpi1m3ef"
+ButtonParticles="*res://UI/ButtonParticles.gd"
 
 [display]
 

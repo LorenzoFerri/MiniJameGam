@@ -1,17 +1,15 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Script" path="res://SkillTree/SkillTree.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://SkillTree/UpgradeNode.tscn" id="2_node"]
 [ext_resource type="Script" path="res://SkillTree/TreeViewport.gd" id="3_view"]
 [ext_resource type="PackedScene" path="res://Space/SpaceBackground.tscn" id="4_space"]
+[ext_resource type="Theme" path="res://SkillTree/UpgradeTheme.tres" id="5_theme"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Resource.png" id="resource_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Capsule.png" id="capsule_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/SpaceShip.png" id="ship_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/SpaceShip_Flight.png" id="flight_png"]
-[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Warp.png" id="warp_png"]
-[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Hand.png" id="hand_png"]
 [ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Wrench.png" id="wrench_png"]
-[ext_resource type="Texture2D" path="res://SkillTree/icons/flexunit-space/Transmitter.png" id="transmitter_png"]
 
 [sub_resource type="AtlasTexture" id="Icon_resource"]
 atlas = ExtResource("resource_png")
@@ -29,21 +27,9 @@ region = Rect2(136, 136, 240, 240)
 atlas = ExtResource("flight_png")
 region = Rect2(138, 138, 236, 236)
 
-[sub_resource type="AtlasTexture" id="Icon_warp"]
-atlas = ExtResource("warp_png")
-region = Rect2(118, 118, 276, 276)
-
-[sub_resource type="AtlasTexture" id="Icon_hand"]
-atlas = ExtResource("hand_png")
-region = Rect2(149, 149, 214, 214)
-
 [sub_resource type="AtlasTexture" id="Icon_wrench"]
 atlas = ExtResource("wrench_png")
 region = Rect2(134, 134, 244, 244)
-
-[sub_resource type="AtlasTexture" id="Icon_transmitter"]
-atlas = ExtResource("transmitter_png")
-region = Rect2(101, 101, 310, 310)
 
 [node name="SkillTree" type="Control"]
 layout_mode = 3
@@ -177,11 +163,14 @@ points = PackedVector2Array(204.55, 162, 155.45, 108)
 width = 2.0
 
 [node name="Core" type="Button" parent="Margin/Column/TreeViewport/Tree"]
+texture_filter = 2
 layout_mode = 0
 offset_left = 452.0
 offset_top = 292.0
 offset_right = 508.0
 offset_bottom = 348.0
+theme = ExtResource("5_theme")
+theme_type_variation = &"OwnedUpgrade"
 disabled = true
 icon = SubResource("Icon_ship")
 icon_alignment = 1
@@ -193,7 +182,7 @@ offset_left = 452.0
 offset_top = 176.0
 offset_right = 508.0
 offset_bottom = 232.0
-icon = SubResource("Icon_resource")
+icon = SubResource("Icon_wrench")
 
 [node name="combustion" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
 offset_left = 382.0
@@ -228,21 +217,21 @@ offset_left = 802.0
 offset_top = 52.0
 offset_right = 858.0
 offset_bottom = 108.0
-icon = SubResource("Icon_warp")
+icon = SubResource("Icon_flight")
 
 [node name="steering" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
 offset_left = 572.0
 offset_top = 362.0
 offset_right = 628.0
 offset_bottom = 418.0
-icon = SubResource("Icon_ship")
+icon = SubResource("Icon_flight")
 
 [node name="flywheel" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
 offset_left = 702.0
 offset_top = 422.0
 offset_right = 758.0
 offset_bottom = 478.0
-icon = SubResource("Icon_wrench")
+icon = SubResource("Icon_flight")
 
 [node name="braking" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
 offset_left = 802.0
@@ -277,21 +266,21 @@ offset_left = 332.0
 offset_top = 362.0
 offset_right = 388.0
 offset_bottom = 418.0
-icon = SubResource("Icon_transmitter")
+icon = SubResource("Icon_resource")
 
 [node name="clamp" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
 offset_left = 202.0
 offset_top = 422.0
 offset_right = 258.0
 offset_bottom = 478.0
-icon = SubResource("Icon_hand")
+icon = SubResource("Icon_resource")
 
 [node name="instant_pickup" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
 offset_left = 102.0
 offset_top = 532.0
 offset_right = 158.0
 offset_bottom = 588.0
-icon = SubResource("Icon_hand")
+icon = SubResource("Icon_resource")
 
 [node name="sorting" parent="Margin/Column/TreeViewport/Tree" instance=ExtResource("2_node")]
 offset_left = 332.0
@@ -312,7 +301,7 @@ offset_left = 102.0
 offset_top = 52.0
 offset_right = 158.0
 offset_bottom = 108.0
-icon = SubResource("Icon_resource")
+icon = SubResource("Icon_wrench")
 
 [node name="NextRun" type="Button" parent="Margin/Column"]
 unique_name_in_owner = true
