@@ -85,4 +85,4 @@ color = Color(0.005, 0.008, 0.015, 0.55)
 unique_name_in_owner = true
 exclusive = true
 title = "Credits"
-dialog_text = "Space Game Icon Set by FlexUnit\nhttps://flexunit.itch.io/space-game-icon-set\n\nCreative Commons Zero v1.0 Universal\nhttps://creativecommons.org/publicdomain/zero/1.0/"
+dialog_text = "Space Game Icon Set by FlexUnit\nhttps://flexunit.itch.io/space-game-icon-set\n\nCreative Commons Zero v1.0 Universal\nhttps://creativecommons.org/publicdomain/zero/1.0/\n\nAudio by Kenney (CC0)\nInterface Sounds, Sci-fi Sounds, Impact Sounds\nhttps://kenney.nl/assets"

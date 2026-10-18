@@ -24,6 +24,7 @@ func update_fuel(amount: float, capacity: float) -> void:
 		%FuelVignette.visible = low_fuel
 		if low_fuel:
 			%LowFuelPulse.play(&"low_fuel")
+			GameAudio.play(&"FuelWarning")
 		else:
 			%LowFuelPulse.stop()
 	_refresh_warnings()
@@ -55,8 +56,16 @@ func refresh(data: PlayerData, cargo_count: int) -> void:
 	_refresh_warnings()
 
 
+func finish_run() -> void:
+	%EndRun.hide()
+	%Warnings.hide()
+
+
 func _refresh_warnings() -> void:
+	var show_cargo_warning := cargo_full and not at_depot
+	if show_cargo_warning and not %CargoWarning.visible:
+		GameAudio.play(&"CargoFull")
 	%FuelWarning.visible = low_fuel
-	%CargoWarning.visible = cargo_full and not at_depot
+	%CargoWarning.visible = show_cargo_warning
 	%ReturnPrompt.visible = (low_fuel or cargo_full) and not at_depot
 	%Warnings.visible = low_fuel or %CargoWarning.visible

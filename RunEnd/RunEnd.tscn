@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" path="res://RunEnd/Art/TrashBag.png" id="4_bag"]
 [ext_resource type="Texture2D" path="res://RunEnd/Art/JunkCube.png" id="5_cube"]
 
+[ext_resource type="AudioStream" path="res://Audio/Kenney/SciFi/Audio/doorClose_000.ogg" id="6_close"]
+[ext_resource type="AudioStream" path="res://Audio/Kenney/Impact/Audio/impactPlate_heavy_003.ogg" id="7_impact"]
+[ext_resource type="AudioStream" path="res://Audio/Kenney/SciFi/Audio/doorOpen_000.ogg" id="8_open"]
+[ext_resource type="AudioStream" path="res://Audio/Kenney/Interface/Audio/confirmation_002.ogg" id="9_reward"]
+
 [sub_resource type="Gradient" id="Gradient_dust"]
 offsets = PackedFloat32Array(0, 0.35, 1)
 colors = PackedColorArray(0.62, 0.64, 0.63, 0.38, 0.48, 0.52, 0.53, 0.22, 0.38, 0.42, 0.44, 0)
@@ -311,6 +316,31 @@ tracks/10/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+tracks/11/type = "audio"
+tracks/11/path = NodePath("PressClose")
+tracks/11/keys = {
+"clips": [{"end_offset": 0.0, "start_offset": 0.0, "stream": ExtResource("6_close")}],
+"times": PackedFloat32Array(0.85)
+}
+tracks/12/type = "audio"
+tracks/12/path = NodePath("PressImpact")
+tracks/12/keys = {
+"clips": [{"end_offset": 0.0, "start_offset": 0.0, "stream": ExtResource("7_impact")}],
+"times": PackedFloat32Array(1.6)
+}
+tracks/13/type = "audio"
+tracks/13/path = NodePath("PressOpen")
+tracks/13/keys = {
+"clips": [{"end_offset": 0.0, "start_offset": 0.0, "stream": ExtResource("8_open")}],
+"times": PackedFloat32Array(1.96)
+}
+tracks/14/type = "audio"
+tracks/14/path = NodePath("RewardSound")
+tracks/14/keys = {
+"clips": [{"end_offset": 0.0, "start_offset": 0.0, "stream": ExtResource("9_reward")}],
+"times": PackedFloat32Array(2.7)
+}
+
 [sub_resource type="AnimationLibrary" id="Library_press"]
 _data = {
 &"RESET": SubResource("Animation_reset"),
@@ -479,3 +509,23 @@ libraries = {
 }
 autoplay = "compact"
 
+
+[node name="PressClose" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+pitch_scale = 0.75
+bus = &"SFX"
+
+[node name="PressImpact" type="AudioStreamPlayer" parent="."]
+volume_db = -3.0
+pitch_scale = 1.0
+bus = &"SFX"
+
+[node name="PressOpen" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+pitch_scale = 0.75
+bus = &"SFX"
+
+[node name="RewardSound" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
+pitch_scale = 1.0
+bus = &"SFX"

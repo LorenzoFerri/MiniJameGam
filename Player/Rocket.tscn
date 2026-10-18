@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bou5b4dhl3vxv" path="res://Player/Models/NewRocket.fbx" id="2_model"]
 [ext_resource type="Shape3D" path="res://Player/Models/RocketCollision.tres" id="3_collision"]
 
+[ext_resource type="AudioStream" path="res://Audio/Kenney/SciFi/Audio/thrusterFire_002.ogg" id="4_engine"]
+[ext_resource type="AudioStream" path="res://Audio/Kenney/SciFi/Audio/thrusterFire_004.ogg" id="5_side_engine"]
+
 [sub_resource type="Curve" id="Curve_m6wx5"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6422222, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -50,6 +53,8 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 8
 script = ExtResource("1_1way2")
 thruster_power = 2
 
@@ -88,3 +93,19 @@ emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_12j75")
 draw_pass_1 = SubResource("PlaneMesh_qpns7")
+
+[node name="EngineAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_engine")
+volume_db = -29.0
+pitch_scale = 0.9
+autoplay = true
+bus = &"Engine"
+
+[node name="SideThrusterAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_side_engine")
+volume_db = -80.0
+pitch_scale = 0.9
+autoplay = true
+bus = &"Engine"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

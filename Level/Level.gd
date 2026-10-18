@@ -16,6 +16,7 @@ var run_active: bool = true
 
 
 func _ready() -> void:
+	GameAudio.play(&"Launch")
 	GameManager.player = player
 	$HUD.setup($Junkyard)
 	player.fuel_changed.connect($HUD.update_fuel)
@@ -55,6 +56,7 @@ func _collect(junk: Junk) -> void:
 		return
 	cargo.append(junk)
 	junk.attach()
+	GameAudio.play(&"Pickup")
 	_refresh_hud()
 	if $Junkyard.overlaps_body(junk):
 		junk.start_delivery()
@@ -77,6 +79,7 @@ func _deposit(junk: Junk) -> void:
 	var payout := roundi(data.stat(&"scrap_value", junk.resource.value) + data.stat(&"delivery_bonus", 0.0))
 	run_earnings += payout
 	data.earn(payout)
+	GameAudio.play(&"Deposit")
 	player.refuel(data.stat(&"fuel_per_delivery", 0.0))
 	junk.queue_free()
 	_spawn_junk.call_deferred()
@@ -103,7 +106,7 @@ func _end_run() -> void:
 	if not run_active:
 		return
 	run_active = false
-	$HUD.set_end_run_visible(false)
+	$HUD.finish_run()
 	SignalBus.round_end.emit(run_earnings)
 
 

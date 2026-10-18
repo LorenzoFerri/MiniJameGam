@@ -37,6 +37,7 @@ func toggle_pause() -> void:
 	if transitioning:
 		return
 	pause_open = not pause_open
+	GameAudio.play(&"Pause" if pause_open else &"Resume")
 	if pause_open:
 		previous_focus = get_viewport().gui_get_focus_owner()
 		%PauseMenu.show()

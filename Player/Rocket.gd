@@ -15,6 +15,8 @@ signal fuel_empty
 @export var turn_fuel_usage: float = 1.0
 
 var fuel: float
+var engine_power := Vector2(-1.0, -1.0)
+var engine_fade: Tween
 
 
 func configure(data: PlayerData) -> void:
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	var reverse := Input.get_action_strength("decelerate")
 	var left := Input.get_action_strength("turn_left")
 	var right := Input.get_action_strength("turn_right")
+	_set_engine_power(maxf(forward, reverse * 0.65), maxf(left, right))
 	var usage := delta * (forward * forward_fuel_usage + reverse * reverse_fuel_usage + (left + right) * turn_fuel_usage)
 	var power := minf(1.0, fuel / usage) if usage > 0 else 1.0
 	%ForwardThruster.emitting = forward > 0
@@ -59,4 +62,23 @@ func _physics_process(delta: float) -> void:
 		fuel = maxf(0.0, fuel - usage)
 		fuel_changed.emit(fuel, fuel_capacity)
 		if fuel == 0:
+			_set_engine_power(0.0, 0.0)
 			fuel_empty.emit()
+
+
+func _set_engine_power(main_power: float, side_power: float) -> void:
+	var power := Vector2(main_power, side_power)
+	if engine_power.is_equal_approx(power):
+		return
+	engine_power = power
+	if engine_fade:
+		engine_fade.kill()
+	engine_fade = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
+	engine_fade.tween_property($EngineAudio, "volume_db", lerpf(-29.0, -5.0, main_power), 0.16)
+	engine_fade.tween_property($EngineAudio, "pitch_scale", lerpf(0.9, 1.08, main_power), 0.16)
+	engine_fade.tween_property($SideThrusterAudio, "volume_db", lerpf(-80.0, -8.0, side_power), 0.16)
+	engine_fade.tween_property($SideThrusterAudio, "pitch_scale", lerpf(0.9, 1.08, side_power), 0.16)
+
+
+func _on_body_entered(_body: Node) -> void:
+	GameAudio.play(&"Impact")

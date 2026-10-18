@@ -15,7 +15,7 @@ func _ready() -> void:
 	for upgrade: SkillUpgrade in PlayerData.UPGRADES.upgrades:
 		upgrades[upgrade.id] = upgrade
 		var button: Button = %Tree.get_node(NodePath(upgrade.id))
-		button.pressed.connect(data.unlock.bind(upgrade))
+		button.pressed.connect(_purchase.bind(upgrade))
 		button.gui_input.connect(_on_upgrade_input.bind(upgrade, button))
 		button.mouse_exited.connect(_hide_details)
 		button.focus_entered.connect(_show_details.bind(upgrade, button))
@@ -23,6 +23,12 @@ func _ready() -> void:
 	_refresh()
 	%TreeViewport.view_changed.connect(_hide_details)
 	%NextRun.grab_focus()
+
+
+func _purchase(upgrade: SkillUpgrade) -> void:
+	if data.can_unlock(upgrade):
+		data.unlock(upgrade)
+		GameAudio.play(&"Upgrade")
 
 
 func _refresh() -> void:

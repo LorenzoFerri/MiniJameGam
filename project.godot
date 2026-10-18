@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SignalBus="*uid://3lrgrje7sj8g"
+GameAudio="*res://Audio/GameAudio.tscn"
 GameManager="*uid://b1lw4kpi1m3ef"
 ButtonParticles="*res://UI/ButtonParticles.gd"
 Interface="*res://UI/Interface.tscn"
