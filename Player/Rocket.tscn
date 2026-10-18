@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://gassisgg7cl"]
 
 [ext_resource type="Script" uid="uid://sgit3d6fndlq" path="res://Player/Rocket.gd" id="1_1way2"]
-[ext_resource type="PackedScene" path="res://Player/Models/RocketMark1.fbx" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://bou5b4dhl3vxv" path="res://Player/Models/NewRocket.fbx" id="2_model"]
 [ext_resource type="Shape3D" path="res://Player/Models/RocketCollision.tres" id="3_collision"]
 
 [sub_resource type="Curve" id="Curve_m6wx5"]
@@ -33,17 +33,13 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bnvu"]
-diffuse_mode = 3
-specular_mode = 1
 transparency = 1
 blend_mode = 1
 shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
 vertex_color_use_as_albedo = true
 albedo_texture = SubResource("Texture_exhaust")
-emission_enabled = true
-emission = Color(0.2, 0.45, 1, 1)
-emission_energy_multiplier = 1.3
-emission_texture = SubResource("Texture_exhaust")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qpns7"]
 material = SubResource("StandardMaterial3D_1bnvu")
@@ -57,8 +53,8 @@ gravity_scale = 0.0
 script = ExtResource("1_1way2")
 thruster_power = 2
 
-[node name="Model" parent="." instance=ExtResource("2_model")]
-transform = Transform3D(-1.3106366, 0, 0, 0, 0, -1.3106366, 0, -1.3106366, 0, 0, 0, 0.9902752)
+[node name="Model" parent="." unique_id=1585076642 instance=ExtResource("2_model")]
+transform = Transform3D(3.7455223e-08, 0, 0.85687566, -0.85687566, 0, 3.7455223e-08, 0, -0.85687566, 0, 0, 0, -0.70687634)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1099692115]
 unique_name_in_owner = true
@@ -70,7 +66,7 @@ shape = ExtResource("3_collision")
 
 [node name="ForwardThruster" type="GPUParticles3D" parent="." unique_id=1323203403]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0891006)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.85)
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_12j75")
@@ -78,7 +74,7 @@ draw_pass_1 = SubResource("PlaneMesh_qpns7")
 
 [node name="LeftSideThruster" type="GPUParticles3D" parent="." unique_id=523624173]
 unique_name_in_owner = true
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.48, 0, -1.4)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.25, 0, -1.4)
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_12j75")
@@ -86,7 +82,7 @@ draw_pass_1 = SubResource("PlaneMesh_qpns7")
 
 [node name="RightSideThruster" type="GPUParticles3D" parent="." unique_id=1235695555]
 unique_name_in_owner = true
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.48, 0, -1.4)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.25, 0, -1.4)
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_12j75")
