@@ -39,7 +39,7 @@ theme_override_constants/separation = 28
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MenuTitle"
-text = "SpaceJunk"
+text = "SpaceScappers"
 
 [node name="Actions" type="VBoxContainer" parent="Margin/Menu"]
 layout_mode = 2
@@ -85,4 +85,4 @@ color = Color(0.005, 0.008, 0.015, 0.55)
 unique_name_in_owner = true
 exclusive = true
 title = "Credits"
-dialog_text = "Space Game Icon Set by FlexUnit\nhttps://flexunit.itch.io/space-game-icon-set\n\nCreative Commons Zero v1.0 Universal\nhttps://creativecommons.org/publicdomain/zero/1.0/\n\nAudio by Kenney (CC0)\nInterface Sounds, Sci-fi Sounds, Impact Sounds\nhttps://kenney.nl/assets"
+dialog_text = "Team\nLorenzoFaith: Programmer/TechArtist\nKimmi: 3d Artist\nOcular: Designer\nLuvBytes: Creative Lead\n\nAssets\nSpace Game Icon Set by FlexUnit (CC0)\nhttps://flexunit.itch.io/space-game-icon-set\n\nAudio by Kenney (CC0)\nInterface Sounds, Sci-fi Sounds, Impact Sounds\nhttps://kenney.nl/assets"

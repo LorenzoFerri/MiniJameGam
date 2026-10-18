@@ -1,36 +1,37 @@
 [gd_scene format=3 uid="uid://g3s0cf6avcwm"]
 
+[ext_resource type="Shader" path="res://Rendering/Shaders/Depot.gdshader" id="1_depot"]
+[ext_resource type="Shader" path="res://Rendering/Shaders/Shield.gdshader" id="2_shield"]
+[ext_resource type="Texture2D" path="res://Rendering/FlowNoise.tres" id="3_noise"]
+[ext_resource type="Script" path="res://Junkyard/Junkyard.gd" id="4_script"]
+[ext_resource type="Script" path="res://Junkyard/Shield.gd" id="5_script"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_12j75"]
 size = Vector3(10, 2, 10)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwwe3"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.055, 0.065, 0.08, 1)
-metallic = 0.55
-roughness = 0.72
+[sub_resource type="ShaderMaterial" id="Material_depot"]
+resource_local_to_scene = true
+shader = ExtResource("1_depot")
+shader_parameter/surface_noise = ExtResource("3_noise")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_12j75"]
-material = SubResource("StandardMaterial3D_wwwe3")
 size = Vector2(10, 10)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_shield"]
 radius = 8.0
 height = 24.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shield"]
-diffuse_mode = 3
-specular_mode = 1
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.25, 0.55, 0.8, 0.025)
+[sub_resource type="ShaderMaterial" id="Material_shield"]
+resource_local_to_scene = true
+shader = ExtResource("2_shield")
+shader_parameter/flow_noise = ExtResource("3_noise")
 
 [sub_resource type="SphereMesh" id="SphereMesh_shield"]
-material = SubResource("StandardMaterial3D_shield")
 radius = 8.0
 height = 16.0
 
 [node name="Junkyard" type="Area3D" unique_id=28662921]
+script = ExtResource("4_script")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1516314719]
 shape = SubResource("BoxShape3D_12j75")
@@ -38,6 +39,7 @@ shape = SubResource("BoxShape3D_12j75")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=533133106]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0000001, 0)
 mesh = SubResource("PlaneMesh_12j75")
+material_override = SubResource("Material_depot")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 aabb = AABB(-5, -1.1, -5, 10, 0.2, 10)
@@ -45,9 +47,12 @@ aabb = AABB(-5, -1.1, -5, 10, 0.2, 10)
 [node name="Shield" type="StaticBody3D" parent="."]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("5_script")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shield"]
 shape = SubResource("CylinderShape3D_shield")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Shield"]
 mesh = SubResource("SphereMesh_shield")
+material_override = SubResource("Material_shield")
+cast_shadow = 0

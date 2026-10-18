@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://kc2wqrddoqdc" path="res://Junk/Models/SatelliteDish.fbx" id="8_model"]
 [ext_resource type="PackedScene" uid="uid://ce56auro50hk8" path="res://Junk/Models/SolarPanels.fbx" id="9_model"]
 
+[ext_resource type="Shader" path="res://Rendering/Shaders/Rope.gdshader" id="10_rope"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_12j75"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_12j75"]
@@ -19,10 +21,23 @@ radius = 3.8853838
 [sub_resource type="ViewportTexture" id="ViewportTexture_12j75"]
 viewport_path = NodePath("ProgressSprite/SubViewport")
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_gv55k"]
+[sub_resource type="Curve3D" id="Curve3D_gv55k"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve3D" id="Curve3D_gv55k"]
+[sub_resource type="ShaderMaterial" id="Material_rope"]
+shader = ExtResource("10_rope")
+
+[sub_resource type="Gradient" id="Gradient_progress"]
+offsets = PackedFloat32Array(0, 0.79, 0.82, 0.92, 0.95, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Texture_progress"]
+gradient = SubResource("Gradient_progress")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
 
 [node name="Junk" type="RigidBody3D" unique_id=504002285]
 axis_lock_linear_y = true
@@ -57,21 +72,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 top_level = true
 visible = false
 billboard = 1
+no_depth_test = true
+pixel_size = 0.016
 texture = SubResource("ViewportTexture_12j75")
 
 [node name="SubViewport" type="SubViewport" parent="ProgressSprite" unique_id=1479806378]
-size = Vector2i(250, 20)
+transparent_bg = true
+size = Vector2i(96, 96)
 
-[node name="ProgressBar" type="ProgressBar" parent="ProgressSprite/SubViewport" unique_id=1422021371]
+[node name="ProgressBar" type="TextureProgressBar" parent="ProgressSprite/SubViewport"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 2
+mouse_filter = 2
 max_value = 1.0
+step = 0.001
+fill_mode = 4
+radial_initial_angle = 270.0
+texture_under = SubResource("Texture_progress")
+texture_progress = SubResource("Texture_progress")
+tint_under = Color(0.08, 0.14, 0.18, 0.85)
+tint_progress = Color(0.4, 0.85, 1, 1)
 
 [node name="PickUpTimer" type="Timer" parent="." unique_id=1621750877]
 unique_name_in_owner = true
@@ -81,22 +105,22 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
-[node name="RopeRenderer" type="MeshInstance3D" parent="." unique_id=1280558493]
-mesh = SubResource("ImmediateMesh_gv55k")
-
 [node name="RopePath" type="Path3D" parent="." unique_id=530660408]
 top_level = true
+visible = false
 curve = SubResource("Curve3D_gv55k")
 
 [node name="RopeMesh" type="CSGPolygon3D" parent="RopePath" unique_id=90822079]
-polygon = PackedVector2Array(-0.09237337, -0.064661324, -0.09853172, 0.03694935, -0.0523448, 0.104689896, 0.030790806, 0.1231645, 0.1170063, 0.083136074, 0.13855982, 0.009237373, 0.11084795, -0.076977916, -0.0030789375, -0.11700635)
+polygon = PackedVector2Array(0.045, 0, 0.03182, 0.03182, 0, 0.045, -0.03182, 0.03182, -0.045, 0, -0.03182, -0.03182, 0, -0.045, 0.03182, -0.03182)
+material = SubResource("Material_rope")
+smooth_faces = true
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
-path_interval = 1.0
+path_interval = 0.15
 path_simplify_angle = 0.0
 path_rotation = 2
-path_rotation_accurate = false
+path_rotation_accurate = true
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0

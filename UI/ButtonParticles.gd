@@ -28,9 +28,18 @@ func _on_button_input(event: InputEvent, button: BaseButton) -> void:
 	else:
 		return
 
+	_spawn_burst(button.get_global_transform_with_canvas() * local_position, button.get_viewport())
+
+
+func burst_at_world(position: Vector3) -> void:
+	var viewport := get_viewport()
+	_spawn_burst(viewport.get_camera_3d().unproject_position(position), viewport)
+
+
+func _spawn_burst(position: Vector2, viewport: Viewport) -> void:
 	var burst := CLICK_BURST.instantiate()
 	var sparks: GPUParticles2D = burst.get_node("Sparks")
-	sparks.position = button.get_global_transform_with_canvas() * local_position
+	sparks.position = position
 	# Belongs to the button's viewport, so it also works in dialogs and survives scene changes.
-	button.get_viewport().add_child(burst)
+	viewport.add_child(burst)
 	sparks.restart()

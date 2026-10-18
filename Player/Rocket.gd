@@ -51,9 +51,9 @@ func _physics_process(delta: float) -> void:
 	_set_engine_power(maxf(forward, reverse * 0.65), maxf(left, right))
 	var usage := delta * (forward * forward_fuel_usage + reverse * reverse_fuel_usage + (left + right) * turn_fuel_usage)
 	var power := minf(1.0, fuel / usage) if usage > 0 else 1.0
-	%ForwardThruster.emitting = forward > 0
-	%RightSideThruster.emitting = left > 0
-	%LeftSideThruster.emitting = right > 0
+	%ForwardThruster.set_firing(forward > 0)
+	%RightSideThruster.set_firing(left > 0)
+	%LeftSideThruster.set_firing(right > 0)
 	apply_force(transform.basis * (Vector3.FORWARD * forward + Vector3.BACK * reverse * reverse_power) * thruster_power * power)
 	apply_torque(transform.basis.y * (left - right) * turning_speed * power)
 	apply_force(-linear_velocity * friction)
@@ -62,6 +62,9 @@ func _physics_process(delta: float) -> void:
 		fuel = maxf(0.0, fuel - usage)
 		fuel_changed.emit(fuel, fuel_capacity)
 		if fuel == 0:
+			%ForwardThruster.set_firing(false)
+			%RightSideThruster.set_firing(false)
+			%LeftSideThruster.set_firing(false)
 			_set_engine_power(0.0, 0.0)
 			fuel_empty.emit()
 

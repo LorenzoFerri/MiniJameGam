@@ -56,6 +56,7 @@ func _collect(junk: Junk) -> void:
 		return
 	cargo.append(junk)
 	junk.attach()
+	ButtonParticles.burst_at_world(junk.global_position + Vector3.UP)
 	GameAudio.play(&"Pickup")
 	_refresh_hud()
 	if $Junkyard.overlaps_body(junk):
@@ -79,6 +80,8 @@ func _deposit(junk: Junk) -> void:
 	var payout := roundi(data.stat(&"scrap_value", junk.resource.value) + data.stat(&"delivery_bonus", 0.0))
 	run_earnings += payout
 	data.earn(payout)
+	$Junkyard.show_delivery()
+	ButtonParticles.burst_at_world(junk.global_position + Vector3.UP)
 	GameAudio.play(&"Deposit")
 	player.refuel(data.stat(&"fuel_per_delivery", 0.0))
 	junk.queue_free()

@@ -19,6 +19,9 @@ func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(direction * delta * speed)
 	if collision:
 		direction = direction.bounce(collision.get_normal()).normalized()
+		var collider := collision.get_collider()
+		if collider is DepotShield:
+			collider.hit(collision.get_position())
 	
 	if global_position.distance_to(GameManager.player.global_position) > 50:
 		set_physics_process(false)
