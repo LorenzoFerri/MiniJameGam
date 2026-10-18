@@ -39,7 +39,7 @@ theme_override_constants/separation = 28
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"MenuTitle"
-text = "SpaceScappers"
+text = "SpaceScrappers"
 
 [node name="Actions" type="VBoxContainer" parent="Margin/Menu"]
 layout_mode = 2
