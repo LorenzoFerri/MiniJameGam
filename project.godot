@@ -31,6 +31,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="MiniJameGam"
 
+[gui]
+
+theme/custom_font="res://UI/Fonts/ShareTech-Regular.ttf"
+
 [input]
 
 end_run={

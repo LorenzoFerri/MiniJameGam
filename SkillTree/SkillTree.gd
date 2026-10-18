@@ -11,7 +11,7 @@ func _ready() -> void:
 	%Menu.pressed.connect(Interface.toggle_pause)
 	%NextRun.pressed.connect(SignalBus.round_start.emit)
 	%NextRun.focus_entered.connect(_hide_details)
-	%Results.text = "+$%d" % GameManager.last_run_earnings
+	%Results.text = "+%d" % GameManager.last_run_earnings
 	for upgrade: SkillUpgrade in PlayerData.UPGRADES.upgrades:
 		upgrades[upgrade.id] = upgrade
 		var button: Button = %Tree.get_node(NodePath(upgrade.id))
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func _refresh() -> void:
-	%Money.text = "$%d" % data.money
+	%Money.text = str(data.money)
 	for upgrade: SkillUpgrade in PlayerData.UPGRADES.upgrades:
 		var button: UpgradeNode = %Tree.get_node(NodePath(upgrade.id))
 		button.refresh(upgrade, data)

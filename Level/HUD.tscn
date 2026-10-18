@@ -1,11 +1,91 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://Level/HUD.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://Level/Art/FuelGauge.png" id="2_gauge"]
+[ext_resource type="Texture2D" path="res://Level/Art/FuelNeedle.png" id="3_needle"]
+[ext_resource type="Texture2D" path="res://UI/Icons/Money.tres" id="4_money"]
+
+[ext_resource type="Texture2D" path="res://RunEnd/Art/JunkCube.png" id="5_cargo"]
+
+[sub_resource type="AtlasTexture" id="Atlas_gauge"]
+atlas = ExtResource("2_gauge")
+region = Rect2(103, 102, 907, 879)
+
+[sub_resource type="AtlasTexture" id="Atlas_needle"]
+atlas = ExtResource("3_needle")
+region = Rect2(518, 392, 61, 159)
+
+[sub_resource type="Theme" id="Theme_readouts"]
+default_font_size = 22
+Label/colors/font_color = Color(0.93, 0.92, 0.87, 1)
+Label/colors/font_shadow_color = Color(0.015, 0.02, 0.025, 0.95)
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 4
+
+[sub_resource type="Gradient" id="Gradient_fuel_vignette"]
+offsets = PackedFloat32Array(0, 0.45, 0.78, 1)
+colors = PackedColorArray(0.72, 0.015, 0.025, 0, 0.72, 0.015, 0.025, 0, 0.72, 0.015, 0.025, 0.1, 0.72, 0.015, 0.025, 0.46)
+
+[sub_resource type="GradientTexture2D" id="Texture_fuel_vignette"]
+gradient = SubResource("Gradient_fuel_vignette")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="Animation" id="Animation_low_fuel"]
+resource_name = "low_fuel"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("FuelVignette:modulate:a")
+tracks/0/interp = 2
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.6, 1.0, 0.6]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Layout/Warnings/FuelWarning:modulate:a")
+tracks/1/interp = 2
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.75, 1.0, 0.75]
+}
+
+[sub_resource type="AnimationLibrary" id="Library_warnings"]
+_data = {
+&"low_fuel": SubResource("Animation_low_fuel")
+}
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
 layer = 10
 script = ExtResource("1_hud")
+
+[node name="FuelVignette" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("Texture_fuel_vignette")
+expand_mode = 1
+
+[node name="LowFuelPulse" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+libraries = {
+&"": SubResource("Library_warnings")
+}
 
 [node name="Layout" type="Control" parent="."]
 layout_mode = 3
@@ -15,45 +95,122 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_readouts")
 
-[node name="Fuel" type="ProgressBar" parent="Layout"]
-unique_name_in_owner = true
+[node name="FuelGauge" type="Control" parent="Layout"]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 12.0
-grow_horizontal = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -252.0
+offset_right = 260.0
+offset_bottom = -7.8
+grow_vertical = 0
 mouse_filter = 2
-tooltip_text = "Fuel"
-max_value = 120.0
-step = 0.01
-value = 120.0
-show_percentage = false
 
-[node name="Status" type="MarginContainer" parent="Layout"]
+[node name="Dial" type="TextureRect" parent="Layout/FuelGauge"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = 20.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("Atlas_gauge")
+expand_mode = 1
+
+[node name="FuelNeedle" type="TextureRect" parent="Layout/FuelGauge"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 107.35
+offset_top = 68.78
+offset_right = 140.4
+offset_bottom = 154.9
+rotation = 0.9599311
+pivot_offset = Vector2(16.25, 70.42)
+mouse_filter = 2
+texture = SubResource("Atlas_needle")
+expand_mode = 1
+
+[node name="FuelValue" type="Label" parent="Layout/FuelGauge"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 62.0
+offset_top = 160.0
+offset_right = 186.0
+offset_bottom = 190.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 20
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cargo" type="HBoxContainer" parent="Layout"]
+layout_mode = 1
+offset_left = 28.0
 offset_top = 24.0
-offset_right = -20.0
-grow_horizontal = 2
+offset_right = 150.0
+offset_bottom = 78.0
 mouse_filter = 2
+theme_override_constants/separation = 12
 
-[node name="Row" type="HBoxContainer" parent="Layout/Status"]
+[node name="Icon" type="TextureRect" parent="Layout/Cargo"]
+custom_minimum_size = Vector2(42, 52)
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 28
+texture = ExtResource("5_cargo")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Load" type="Label" parent="Layout/Status/Row"]
+[node name="Readout" type="VBoxContainer" parent="Layout/Cargo"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Layout/Cargo/Readout"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.7, 0.71, 0.67, 1)
+theme_override_font_sizes/font_size = 12
+text = "CARGO"
+
+[node name="Load" type="Label" parent="Layout/Cargo/Readout"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "0/2"
+mouse_filter = 2
+text = "0 / 2"
 
-[node name="Money" type="Label" parent="Layout/Status/Row"]
+[node name="MoneyReadout" type="HBoxContainer" parent="Layout"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -348.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = 68.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="Icon" type="TextureRect" parent="Layout/MoneyReadout"]
+custom_minimum_size = Vector2(24, 44)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_money")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Money" type="Label" parent="Layout/MoneyReadout"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "$0"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 26
+text = "0"
+vertical_alignment = 1
 
 [node name="Compass" type="Node2D" parent="Layout"]
 unique_name_in_owner = true
@@ -71,12 +228,56 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 280.0
 offset_top = -56.0
+offset_right = -280.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+theme_override_font_sizes/font_size = 18
 text = "E — End run"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Warnings" type="VBoxContainer" parent="Layout"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 96.0
+offset_right = 280.0
+offset_bottom = 180.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="FuelWarning" type="Label" parent="Layout/Warnings"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.28, 0.23, 1)
+theme_override_font_sizes/font_size = 24
+text = "LOW FUEL"
+horizontal_alignment = 1
+
+[node name="CargoWarning" type="Label" parent="Layout/Warnings"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+text = "CARGO FULL"
+horizontal_alignment = 1
+
+[node name="ReturnPrompt" type="Label" parent="Layout/Warnings"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "Return to base"
+horizontal_alignment = 1

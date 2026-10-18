@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://85alc53ep4pf" path="res://SkillTree/icons/flexunit-space/SpaceShip.png" id="ship_png"]
 [ext_resource type="Texture2D" uid="uid://ch3km853ed0u3" path="res://SkillTree/icons/flexunit-space/Wrench.png" id="wrench_png"]
 
+[ext_resource type="Texture2D" path="res://UI/Icons/Money.tres" id="7_money"]
+
 [sub_resource type="AtlasTexture" id="Icon_ship"]
 atlas = ExtResource("ship_png")
 region = Rect2(136, 136, 240, 240)
@@ -79,11 +81,24 @@ layout_mode = 2
 theme_type_variation = &"Caption"
 text = "Last run"
 
-[node name="Results" type="Label" parent="Margin/Column/Header/LastRun" unique_id=1899062087]
+[node name="Value" type="HBoxContainer" parent="Margin/Column/Header/LastRun"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="Margin/Column/Header/LastRun/Value"]
+custom_minimum_size = Vector2(16, 30)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_money")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Results" type="Label" parent="Margin/Column/Header/LastRun/Value" unique_id=1899062087]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"StatValue"
-text = "+$0"
+text = "+0"
+vertical_alignment = 1
 
 [node name="Balance" type="VBoxContainer" parent="Margin/Column/Header" unique_id=1424702628]
 custom_minimum_size = Vector2(80, 0)
@@ -95,11 +110,24 @@ layout_mode = 2
 theme_type_variation = &"Caption"
 text = "Money"
 
-[node name="Money" type="Label" parent="Margin/Column/Header/Balance" unique_id=1106026614]
+[node name="Value" type="HBoxContainer" parent="Margin/Column/Header/Balance"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="Margin/Column/Header/Balance/Value"]
+custom_minimum_size = Vector2(16, 30)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_money")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Money" type="Label" parent="Margin/Column/Header/Balance/Value" unique_id=1106026614]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"StatValue"
-text = "$0"
+text = "0"
+vertical_alignment = 1
 
 [node name="TreeViewport" type="Control" parent="Margin/Column" unique_id=1423901174]
 unique_name_in_owner = true
